@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Laravel | Multi-prupose</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">  
+  <title>Laravel | Multi-purpose</title>
   <link rel="stylesheet" href="/css/app.css"> 
 </head>
-<body class="hold-transition sidebar-mini">  
-<div class="wrapper"> 
+<body class="hold-transition sidebar-mini">   
+<div class="wrapper" id="app"> 
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
@@ -59,12 +60,12 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
            <li class="nav-item">
-            <a href="#" class="nav-link">
+            <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Dashboard
+                Dashboard 
               </p>
-            </a>
+            </router-link>
           </li>
 
           <li class="nav-item has-treeview"> <!-- menu-open -->
@@ -92,12 +93,12 @@
           </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <router-link to="/profile" class="nav-link"> 
             <i class="nav-icon fas fa-user"></i>
             <p>
               Profile
             </p>
-          </a>
+          </router-link>  
         </li>
 
         <li class="nav-item">
@@ -126,7 +127,8 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          
+            <!-- component matched by the route will render here -->
+            <router-view></router-view> 
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
