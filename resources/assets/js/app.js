@@ -8,6 +8,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import moment from 'moment';
+//Vue.use(require('vue-moment'));    
+
 
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;   
@@ -28,6 +31,15 @@ const router = new VueRouter({
   routes, // short for `routes: routes`,
    mode: "history" 
 })
+// global filter
+Vue.filter('upText', function(text) {
+	return text.charAt(0).toUpperCase() + text.slice(1) 
+
+});  
+
+Vue.filter('myDate', function(createdAt) {
+	return moment(createdAt).format('MMMM Do YYYY');    
+}); 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

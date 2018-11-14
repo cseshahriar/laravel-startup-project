@@ -20,8 +20,8 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Registered At</th> 
                             <th>Type</th>
-                            <th>Registered At</th>
                             <th>Modify</th>
                         </tr>
         
@@ -29,8 +29,8 @@
                             <td>{{ user.id }}</td> 
                             <td>{{ user.name }}</td>  
                             <td>{{ user.email }}</td>  
-                            <td>{{ user.created_at }}</td>  
-                            <td><span class="tag tag-success">{{ user.type }}</span></td> 
+                            <td>{{ user.created_at | myDate }}</td>    
+                            <td><span class="tag tag-success">{{ user.type | upText }}</span></td>  
                             <td>
                                 <a href="#"><i class="fa fa-edit text-primary"></i></a> /
                                 <a href="#"><i class="fa fa-trash text-danger"></i></a>
