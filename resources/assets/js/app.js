@@ -7,25 +7,39 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+window.Vue = require('vue'); 
+
 import moment from 'moment';
 //Vue.use(require('vue-moment'));    
 
-
+// vform
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;   
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+// VueRouter
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+// VueProgressBar
 import VueProgressBar from 'vue-progressbar'
 Vue.use(VueProgressBar, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
   height: '5px' 
 })
+
+//sweetalert2
+import swal from 'sweetalert2'
+window.swal = swal; 
+const toast = swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+window.toast = toast; 
 
 
 let routes = [
