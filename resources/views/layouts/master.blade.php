@@ -122,8 +122,13 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
+
             <!-- component matched by the route will render here -->
             <router-view></router-view> 
+
+            <!-- set progressbar -->
+            <vue-progress-bar></vue-progress-bar>
+
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
