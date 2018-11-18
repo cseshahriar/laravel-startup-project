@@ -87,8 +87,8 @@
                   </div>
 
                   <div class="form-group">   
-                     <input type="password" v-model="form.password" name="password" id="password" class="form-control" :class="{ 'is-invalid' : form.errors.has('password') }">
-                        </has-error :form="form" field="password"></has-error> 
+                     <input type="password" v-model="form.password" name="password" id="password" class="form-control" :class="{ 'is-invalid' : form.errors.has('password') }">  
+                        </has-error :form="form" field="password"></has-error>    
                   </div>
               </div>
 
@@ -128,16 +128,20 @@
         createUser() {
            this.$Progress.start();
            
-           this.form.post('api/user');   
+           this.form.post('api/user')
+           .then(() => {
+             Fire.$emit('AfterCreate');  //custom event 
+              $('#addNew').modal('hide');    
+               toast({
+                  type: 'success',
+                  title: 'User created in successfully'
+              });
+             this.$Progress.finish();  
+           }) 
+           .catch( () => {   
+            
+           })
            
-           Fire.$emit('AfterCreate');  //custom event 
-
-            $('#addNew').modal('hide');    
-             toast({
-                type: 'success',
-                title: 'User created in successfully'
-            });
-           this.$Progress.finish(); 
         }
       },
       created() {
