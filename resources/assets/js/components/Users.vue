@@ -55,13 +55,14 @@
             <div class="modal-content">
               
               <div class="modal-header">
-                <h5 class="modal-title" id="addNewLabel">Add New</h5>
+                <h5 class="modal-title" id="addNewLabel" v-show="!editmode">Add New</h5>
+                <h5 class="modal-title" id="addNewLabel" v-show="editmode">Update User's Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
 
-              <form @submit.prevent="createUser"> <!-- prevent for not refresh the page -->
+              <form @submit.prevent="editmode ? updateUser() : createUser()"> <!-- prevent for not refresh the page -->
               <div class="modal-body">
                   <div class="form-group">  
                     <input v-model="form.name" type="text" name="name" placeholder="Name" 
@@ -98,7 +99,8 @@
 
               <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" data-dismiss="modal">Close</button>
-                 <button type="submit" class="btn btn-primary">Create</button>
+                 <button type="submit" class="btn btn-success" v-show="editmode">Update</button> 
+                 <button type="submit" class="btn btn-primary" v-show="!editmode">Create</button> 
               </div>
             </form>
             </div>
@@ -112,6 +114,7 @@
     export default {
       data() {
         return {
+          editmode: false,
           users : {},
           form : new Form({ 
             name: '',
@@ -125,15 +128,19 @@
       },
       methods: {
         newModal() {
-          this.form.clear(); 
+          this.editmode = false;  
+          this.form.reset(); 
           $('#addNew').modal('show');  
-        }
-        ,
-        editModal(user) {
-          this.form.clear(); 
+        },
+        editModal(user) {  
+          this.editmode = true; 
+          this.form.reset();  
           $('#addNew').modal('show');  
           this.form.fill(user); 
-        }
+        },
+        updateUser() {
+          console.log('edit');
+        } 
         ,
         deleteUser(id) {
             swal({
@@ -168,6 +175,7 @@
           axios.get('api/user').then( ({data}) => (this.users = data.data) );      
         }, 
         createUser() {
+
            this.$Progress.start();
            
            this.form.post('api/user')
