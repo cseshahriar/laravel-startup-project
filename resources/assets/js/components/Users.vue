@@ -7,7 +7,7 @@
                 <h3 class="card-title">Users Table</h3> 
 
                 <div class="card-tools">
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addNew">Add New 
+                    <button class="btn btn-success" @click="newModal">Add New 
                         <i class="fa fa-user-plus fa-fw"></i> 
                     </button> 
                 </div>
@@ -32,7 +32,9 @@
                             <td>{{ user.created_at | myDate }}</td>    
                             <td><span class="tag tag-success">{{ user.type | upText }}</span></td>  
                             <td>
-                                <a href="#"><i class="fa fa-edit text-primary"></i></a> /
+                                <a href="#" @click="editModal(user)">
+                                  <i class="fa fa-edit text-primary"></i>
+                                </a> /
                                 <a href="#" @click="deleteUser(user.id)">      
                                   <i class="fa fa-trash text-danger"></i>
                                 </a>
@@ -122,6 +124,17 @@
         } 
       },
       methods: {
+        newModal() {
+          this.form.clear(); 
+          $('#addNew').modal('show');  
+        }
+        ,
+        editModal(user) {
+          this.form.clear(); 
+          $('#addNew').modal('show');  
+          this.form.fill(user); 
+        }
+        ,
         deleteUser(id) {
             swal({
               title: 'Are you sure?',
