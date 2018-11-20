@@ -117,6 +117,7 @@
           editmode: false,
           users : {},
           form : new Form({ 
+            id: '', 
             name: '',
             email: '',
             password: '',
@@ -139,9 +140,23 @@
           this.form.fill(user); 
         },
         updateUser() {
-          console.log('edit');
-        } 
-        ,
+          //console.log('edit');
+          this.$Progress.start(); 
+          this.form.put('api/user/'+this.form.id)
+          .then( () => { 
+            $('#addNew').modal('hide'); 
+             toast({
+                  type: 'success',
+                  title: 'Information has been updated',
+              });
+              this.$Progress.finish(); 
+              Fire.$emit('AfterCreate'); 
+
+          } )
+          .catch( () => {
+              this.$Progress.fail(); 
+           } ); 
+        } ,
         deleteUser(id) {
             swal({
               title: 'Are you sure?',
@@ -167,7 +182,6 @@
                   swal('Failed!', 'There was something wrong.', 'warning'); 
                 });
 
-
               }
             })
         },
@@ -175,9 +189,7 @@
           axios.get('api/user').then( ({data}) => (this.users = data.data) );      
         }, 
         createUser() {
-
            this.$Progress.start();
-           
            this.form.post('api/user')
            .then(() => {
              Fire.$emit('AfterCreate');  //custom event 
@@ -189,7 +201,7 @@
              this.$Progress.finish();  
            }) 
            .catch( () => {   
-            
+              this.$Progress.fail(); 
            })
            
         }
