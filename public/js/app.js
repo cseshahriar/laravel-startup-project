@@ -70714,10 +70714,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$Progress.start();
       this.form.put('api/user/' + this.form.id).then(function () {
         $('#addNew').modal('hide');
-        toast({
-          type: 'success',
-          title: 'Information has been updated'
-        });
+        swal('Updated!', 'Information has been updated.', 'success');
         _this.$Progress.finish();
         Fire.$emit('AfterCreate');
       }).catch(function () {

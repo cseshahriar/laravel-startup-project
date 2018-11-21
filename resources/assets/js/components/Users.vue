@@ -145,10 +145,11 @@
           this.form.put('api/user/'+this.form.id)
           .then( () => { 
             $('#addNew').modal('hide'); 
-             toast({
-                  type: 'success',
-                  title: 'Information has been updated',
-              });
+              swal(
+                'Updated!',
+                'Information has been updated.',
+                'success'
+              )
               this.$Progress.finish(); 
               Fire.$emit('AfterCreate'); 
 
@@ -183,7 +184,7 @@
                 });
 
               }
-            })
+            }) 
         },
         loadUsers() {
           axios.get('api/user').then( ({data}) => (this.users = data.data) );      
@@ -201,7 +202,7 @@
              this.$Progress.finish();  
            }) 
            .catch( () => {   
-              this.$Progress.fail(); 
+              this.$Progress.fail();  
            })
            
         }
