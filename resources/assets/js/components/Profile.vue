@@ -185,7 +185,7 @@
                         <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                         <div class="col-sm-10">
-                          <input type="email" name="name" v-model="form.name" class="form-control" id="inputName" placeholder="Name">
+                          <input type="text" name="name" v-model="form.name" class="form-control" id="inputName" placeholder="Name">
                         </div>
                       </div>
                       <div class="form-group">
@@ -207,7 +207,7 @@
                         <label for="profilePhoto" class="col-sm-2 control-label">Profile Photo</label>
 
                         <div class="col-sm-10">
-                          <input type="file" class="form-control-file" name="photo" id="profilePhoto">
+                          <input type="file" @change="updateProfile" class="form-control-file" name="photo" id="profilePhoto">
                         </div>
                       </div>
 
@@ -223,7 +223,7 @@
                      
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" @click.prevent="updateInfo" class="btn btn-danger">Submit</button> 
                         </div>
                       </div>
                     </form>
@@ -259,6 +259,19 @@
         },
         created() {
           axios.get('api/profile').then( ({data}) => (this.form.fill(data)) );
+        },
+        methods: {
+          updateProfile(e) {
+            //console.log('uploading'); 
+            let file = e.target.files[0];
+            let reader = new FileReader();
+            //let newThis = this;
+            reader.onloadend = (file) => {
+              //console.log('RESULT', reader.result)
+              this.form.photo = reader.result; 
+            }
+            reader.readAsDataURL(file);    
+          }
         }
     }
 </script>

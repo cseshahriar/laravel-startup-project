@@ -74,6 +74,16 @@ class UserController extends Controller
         return auth('api')->user();  
     }
 
+    public function updateProfile(Request $request) {
+        $user = auth('api')-user(); 
+        if($request->photo) {
+            // image upload 
+            $name = time().'.'.explode('/', explode(':', substr($request->photo,0, strpos($request->photo, ';')))[1])[1];  
+            // unique string ,., extension
+            \Image::make($request->photo)->save(public_path('/img/profile/').$name);
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -84,7 +94,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-         $this->validate($request, [
+        $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|string|min:6',  
