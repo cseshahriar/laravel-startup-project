@@ -185,14 +185,16 @@
                         <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                         <div class="col-sm-10">
-                          <input type="text" name="name" v-model="form.name" class="form-control" id="inputName" placeholder="Name">
+                          <input type="text" name="name" v-model="form.name" class="form-control" id="inputName" placeholder="Name" :class="{ 'is-invalid': form.errors.has('name') }">
+                           <has-error :form="form" field="name"></has-error> 
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                         <div class="col-sm-10">
-                          <input type="email" v-model="form.email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                          <input type="email" v-model="form.email" class="form-control" id="inputEmail" name="email" placeholder="Email" :class="{ 'is-invalid': form.errors.has('email') }">
+                          <has-error :form="form" field="email"></has-error>
                         </div>
                       </div>
                       <div class="form-group">
@@ -208,21 +210,22 @@
 
                         <div class="col-sm-10">
                           <input type="file" @change="updateProfile" name="photo" class="form-input">
-                        </div>
+                        </div> 
                       </div>
 
                       <div class="form-group">
                         <label for="profilePhoto" class="col control-label">Passport (Leave empty if not changing)</label>  
 
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" v-model="form.password" name="passport" id="passport" placeholder="Passport">
+                        <div class="col-sm-10"> 
+                          <input type="password" class="form-control" v-model="form.password" name="passport" id="passport" placeholder="Passport" :class="{ 'is-invalid': form.errors.has('password') }">  
+                          <has-error :form="form" field="password"></has-error>
                         </div>
                       </div>
                     
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Submit</button> 
-                        </div>
+                          <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Save</button> 
+                        </div> 
                       </div>
                     </form>
                   </div>
