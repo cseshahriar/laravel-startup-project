@@ -19,7 +19,7 @@
                     <h5 class="widget-user-desc">Web Designer</h5>
                   </div>
                   <div class="widget-user-image">
-                    <img class="img-circle" src="" alt="User Avatar">
+                    <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar"> 
                   </div>
                   <div class="card-footer">
                     <div class="row">
@@ -196,10 +196,10 @@
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                        <label for="inputExperience" class="col-sm-2 control-label">Bio</label>
 
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                          <textarea class="form-control" name="bio" v-model="form.bio" id="inputExperience" placeholder="Experience"></textarea>
                         </div>
                       </div>
 
@@ -215,12 +215,10 @@
                         <label for="profilePhoto" class="col control-label">Passport (Leave empty if not changing)</label>  
 
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="passport" id="passport" placeholder="Passport">
+                          <input type="text" class="form-control" v-model="form.password" name="passport" id="passport" placeholder="Passport">
                         </div>
                       </div>
                     
-
-                     
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                           <button type="submit" @click.prevent="updateInfo" class="btn btn-success">Submit</button> 
@@ -261,6 +259,9 @@
           axios.get('api/profile').then( ({data}) => (this.form.fill(data)) );
         },
         methods: {
+            getProfilePhoto(){
+              return "img/profile/"+this.form.photo; 
+            },
             updateInfo(){
               this.$Progress.start();
                 this.form.put('api/profile')
