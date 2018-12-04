@@ -71255,19 +71255,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     updateInfo: function updateInfo() {
-      this.form.put('api/profile').then(function () {}).catch(function () {});
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/profile').then(function () {
+        _this2.$Progress.finish();
+      }).catch(function () {
+        _this2.$Progress.fail();
+      });
     },
     updateProfile: function updateProfile(e) {
-      var _this2 = this;
+      var _this3 = this;
 
       //console.log('uploading'); 
       var file = e.target.files[0];
       var reader = new FileReader();
       //let newThis = this;
-      reader.onloadend = function (file) {
-        //console.log('RESULT', reader.result)
-        _this2.form.photo = reader.result;
-      };
+      if (file['size'] < 2111775) {
+        // 2MB is = 2111775 bites
+        reader.onloadend = function (file) {
+          //console.log('RESULT', reader.result)
+          _this3.form.photo = reader.result;
+        };
+      } else {
+        swal({
+          type: 'error',
+          title: 'Oops...',
+          text: 'You are uploading a large file'
+        });
+      }
       reader.readAsDataURL(file);
     }
   }
