@@ -3,8 +3,11 @@
 /.idea
 /.vscode
 /.vagrant
+/storage/framework/cache
+/vendor 
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
 .phpunit.result.cache
+.env
