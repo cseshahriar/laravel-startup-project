@@ -18,6 +18,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');    
+        //$this->authorize('isAdmin'); // admin can access all
     }
 
     /**
@@ -137,7 +138,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
+        // if current is admin
+        $this->authorize('isAdmin');  
+
+        $user = User::findOrFail($id); 
 
         // delete the user
         $user->delete();  
