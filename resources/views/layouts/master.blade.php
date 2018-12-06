@@ -67,7 +67,7 @@
               </p>
             </router-link>
           </li>
-
+          @can('isAdmin')
           <li class="nav-item has-treeview"> <!-- menu-open -->
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog text-success"></i>  
@@ -85,7 +85,8 @@
               </li> 
             </ul>
           </li>
-          
+        @endcan
+        
         @can('isAdmin')
         <li class="nav-item">
           <router-link to="/developer" class="nav-link"> 
