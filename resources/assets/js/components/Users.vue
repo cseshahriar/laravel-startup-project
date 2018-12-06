@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+
         <div class="row mt-5">
           <div class="col-md-12">
             <div class="card" v-if="$gate.isAdmin()"> 
@@ -47,6 +48,10 @@
             </div>
             <!-- /.card -->
           </div>
+        </div>
+
+        <div v-if="!$gate.isAdmin()"> 
+          <not-found></not-found>
         </div>
 
         <!-- Modal -->
@@ -106,6 +111,7 @@
             </div>
           </div>
         </div>
+
     </div>
 
 </template>

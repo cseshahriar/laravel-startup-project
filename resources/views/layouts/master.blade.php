@@ -50,7 +50,12 @@
           <img src="../img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a> 
+          <a href="#" class="d-block">
+            {{ Auth::user()->name }}
+            <p>
+               {{ Auth::user()->type }}
+            </p>
+          </a> 
         </div>
       </div>
 
