@@ -65362,6 +65362,14 @@ var Gate = function () {
 		value: function isUser() {
 			return this.user.type === 'user';
 		}
+	}, {
+		key: 'isAdminOrAuthor',
+		value: function isAdminOrAuthor() {
+			//return this.user.type === 'user';   
+			if (this.user.type === 'user' || this.user.type === 'author') {
+				return true;
+			}
+		}
 	}]);
 
 	return Gate;
@@ -72174,7 +72182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     loadUsers: function loadUsers() {
       var _this3 = this;
 
-      if (this.$gate.isAdmin()) {
+      if (this.$gate.isAdminOrAuthor()) {
         axios.get('api/user').then(function (_ref) {
           var data = _ref.data;
           return _this3.users = data.data;
@@ -72220,7 +72228,7 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-md-12" }, [
-        _vm.$gate.isAdmin()
+        _vm.$gate.isAdminOrAuthor()
           ? _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-header" }, [
                 _c("h3", { staticClass: "card-title" }, [
@@ -72314,7 +72322,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    !_vm.$gate.isAdmin() ? _c("div", [_c("not-found")], 1) : _vm._e(),
+    !_vm.$gate.isAdminOrAuthor() ? _c("div", [_c("not-found")], 1) : _vm._e(),
     _vm._v(" "),
     _c(
       "div",

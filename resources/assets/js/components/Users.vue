@@ -3,7 +3,7 @@
 
         <div class="row mt-5">
           <div class="col-md-12">
-            <div class="card" v-if="$gate.isAdmin()"> 
+            <div class="card" v-if="$gate.isAdminOrAuthor()"> 
               <div class="card-header">
                 <h3 class="card-title">Users Table</h3> 
 
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div v-if="!$gate.isAdmin()"> 
+        <div v-if="!$gate.isAdminOrAuthor()"> 
           <not-found></not-found>
         </div>
 
@@ -193,7 +193,7 @@
             }) 
         },
         loadUsers() {
-          if(this.$gate.isAdmin() ){
+          if(this.$gate.isAdminOrAuthor() ){
             axios.get('api/user').then( ({data}) => (this.users = data.data) );      
           } 
         }, 
