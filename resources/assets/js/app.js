@@ -14,9 +14,12 @@ import moment from 'moment';
 
 // vform
 import { Form, HasError, AlertError } from 'vform';
-window.Form = Form;   
+window.Form = Form;
+
+// global components
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 import Gate from './Gate';
 Vue.prototype.$gate = new Gate(window.user);  
