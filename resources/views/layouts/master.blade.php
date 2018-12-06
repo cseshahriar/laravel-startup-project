@@ -172,6 +172,12 @@
 </div>
 <!-- ./wrapper -->
 
+@auth
+  <script>
+    window.user = @json(auth()->user()); //current user info 
+  </script>
+@endauth
+
 <!-- REQUIRED SCRIPTS -->
 <script src="/js/app.js"></script>
 </body>

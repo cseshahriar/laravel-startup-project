@@ -18,6 +18,9 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+import Gate from './Gate';
+Vue.prototype.$gate = new Gate(window.user);  
+
 // VueRouter
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
