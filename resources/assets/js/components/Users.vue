@@ -209,17 +209,7 @@
             axios.get('api/user').then( ({data}) => (this.users = data) );      
           } 
         }, 
-        createUser() {
-           Fire.$on('searching', () => {
-            let query = this.$parent.search; 
-              axios.get('api.findUser?q=' + query)
-              .then( (data) => { 
-                this.users = data.data; 
-              } )
-              .catch( () => { 
-
-              } );
-           }); // event lestining 
+        createUser() { 
            this.$Progress.start();
            this.form.post('api/user')
            .then(() => {
@@ -238,6 +228,18 @@
         }
       },
       created() {
+          Fire.$on('searching', () => {
+            let query = this.$parent.search; 
+              axios.get('api/findUser?q=' + query)
+              .then( (data) => { 
+                this.users = data.data;  
+              } )
+              .catch( () => { 
+
+              } );
+          }); // event lestining
+
+          // load users 
           this.loadUsers();        
           //setInterval( () => this.loadUsers() , 3000);   
           Fire.$on('AfterCreate', () => { 

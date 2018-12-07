@@ -73576,12 +73576,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     createUser: function createUser() {
       var _this5 = this;
 
-      Fire.$on('searching', function () {
-        var query = _this5.$parent.search;
-        axios.get('api.findUser?q=' + query).then(function (data) {
-          _this5.users = data.data;
-        }).catch(function () {});
-      }); // event lestining 
       this.$Progress.start();
       this.form.post('api/user').then(function () {
         Fire.$emit('AfterCreate'); //custom event 
@@ -73599,6 +73593,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   created: function created() {
     var _this6 = this;
 
+    Fire.$on('searching', function () {
+      var query = _this6.$parent.search;
+      axios.get('api/findUser?q=' + query).then(function (data) {
+        _this6.users = data.data;
+      }).catch(function () {});
+    }); // event lestining
+
+    // load users 
     this.loadUsers();
     //setInterval( () => this.loadUsers() , 3000);   
     Fire.$on('AfterCreate', function () {
