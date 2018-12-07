@@ -29971,3 +29971,22 @@ readers do not read off random characters that represent icons */
   background-color: #007bff;
 }
 
+@media print {
+  .nav.nav-tabs li:not(.active) {
+    display: none;
+  }
+
+  .invoice {
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .table-responsive table {
+    background-color: transparent !important;
+  }
+
+@page {
+    margin: 0;
+}
+}
+

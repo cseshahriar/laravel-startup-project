@@ -22,3 +22,24 @@ $fa-font-path: "../webfonts";
     background-color: #007bff;  
 } 
 .router-link-active {}
+
+
+//for print
+@media print {
+	.nav.nav-tabs li:not(.active) {
+		display:none;
+	}
+
+	.invoice {
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+	.table-responsive table {
+	   background-color: transparent !important;
+	}
+
+	@page {
+		margin : 0; 
+	}
+}
