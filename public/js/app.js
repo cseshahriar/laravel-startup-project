@@ -30887,10 +30887,9 @@ var app = new Vue({
     search: ''
   },
   methods: {
-    searchit: function searchit() {
-      //console.log('Hi');
-      Fire.$emit('searching'); // create custom event 
-    }
+    searchit: _.debounce(function () {
+      Fire.$emit('searching'); // create custom event
+    }, 1000)
   }
 });
 

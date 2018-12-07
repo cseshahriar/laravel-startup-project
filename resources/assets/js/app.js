@@ -109,9 +109,8 @@ const app = new Vue({
     search : '' 
   },
   methods: {
-    searchit() {
-      //console.log('Hi');
-      Fire.$emit('searching'); // create custom event 
-    }
+    searchit: _.debounce( () => {
+      Fire.$emit('searching'); // create custom event
+     }, 1000)  
   }
 });
