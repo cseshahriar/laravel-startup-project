@@ -30882,7 +30882,16 @@ Vue.component('not-found', __webpack_require__(140));
 
 var app = new Vue({
   el: "#app",
-  router: router
+  router: router,
+  data: {
+    search: ''
+  },
+  methods: {
+    searchit: function searchit() {
+      //console.log('Hi');
+      Fire.$emit('searching'); // create custom event 
+    }
+  }
 });
 
 /***/ }),
@@ -73567,6 +73576,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     createUser: function createUser() {
       var _this5 = this;
 
+      Fire.$on('searching', function () {
+        var query = _this5.$parent.search;
+        axios.get('api.findUser?q=' + query).then(function (data) {
+          _this5.users = data.data;
+        }).catch(function () {});
+      }); // event lestining 
       this.$Progress.start();
       this.form.post('api/user').then(function () {
         Fire.$emit('AfterCreate'); //custom event 

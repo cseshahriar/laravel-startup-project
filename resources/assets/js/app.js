@@ -104,5 +104,14 @@ Vue.component(
 
 const app = new Vue({
   el: "#app", 
-  router 
+  router,
+  data: {
+    search : '' 
+  },
+  methods: {
+    searchit() {
+      //console.log('Hi');
+      Fire.$emit('searching'); // create custom event 
+    }
+  }
 });

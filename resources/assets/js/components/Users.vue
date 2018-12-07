@@ -210,6 +210,16 @@
           } 
         }, 
         createUser() {
+           Fire.$on('searching', () => {
+            let query = this.$parent.search; 
+              axios.get('api.findUser?q=' + query)
+              .then( (data) => { 
+                this.users = data.data; 
+              } )
+              .catch( () => { 
+
+              } );
+           }); // event lestining 
            this.$Progress.start();
            this.form.post('api/user')
            .then(() => {
